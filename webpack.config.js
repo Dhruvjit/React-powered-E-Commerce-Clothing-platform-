@@ -17,19 +17,15 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                loader: 'style-loader'
-            },
-            {
-                test: /\.css$/,
-                loader: 'css-loader',
-                options: {
-                    modules: {
-                        mode: 'local',
-                        localIdentName: '[name]__[local]--[hash:base64:5]',
-                        hashPrefix: 'my-custom-hash',
-                    },
-                },
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    'style-loader',
+                    // Translates CSS into CommonJS
+                    'css-loader',
+                    // Compiles Sass to CSS
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
