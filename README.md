@@ -1,1 +1,1 @@
-# React-powered-E-Commerce-Clothing-platform-
+# React & Webpack Powered Clothing portal 
