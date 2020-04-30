@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-clothing-store",
   "version": "1.0.0",
-  "description": "Online clothing store powered by react with payment gateway",
+  "description": "Online clothing store powered by React and Payment Stripe for payment processing",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
