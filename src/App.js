@@ -7,7 +7,6 @@ class App extends Component{
         return(
             <div className="body">
                 <HomePage/>
-                <div>hello</div>
             </div>
         );
     }
