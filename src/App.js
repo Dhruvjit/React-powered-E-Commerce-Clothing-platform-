@@ -2,17 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import {HomePage} from "./pages/homepage/homepage.component";
 import {BrowserRouter as Router, Route} from "react-router-dom";
-
-const HatsPage = props => {
-    console.log(props)
-    return (
-        <div>
-            <h1>
-                Hats Page
-            </h1>
-        </div>
-    );
-};
+import ShopPage from "./pages/shop/shop.component";
 
 class App extends Component{
     render(){
@@ -20,7 +10,7 @@ class App extends Component{
             <Router>
                 <div className="body">
                     <Route exact path='/' component={HomePage} />
-                    <Route path='/hats' component={HatsPage} />
+                    <Route path='/shop' component={ShopPage} />
                 </div>
             </Router>
         );
