@@ -35,6 +35,7 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2"
   }
 }
