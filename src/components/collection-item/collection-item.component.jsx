@@ -5,7 +5,6 @@ import './collection-item.styles.scss';
 * that will be shown in the collection
 *  */
 const CollectionItem = ({id, name, price, imageUrl}) => {
-    console.log(imageUrl);
     return(
         <div className="collection-item">
             <div className="image"

@@ -4,6 +4,11 @@
   font-size: 16px !important;
   padding: 20px 60px;
 }
+// apply to global html 'a' or router Link tag
+a{
+  text-decoration: none;
+  color: black;
+}
 
 @font-face {
   font-family: 'Asap';
