@@ -1,6 +1,6 @@
 import React from 'react';
 import SHOP_DATA from "./shop.data";
-import CollectionPreview from "../collection-preview/collection-preview.component";
+import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 
 /* Here we need to store data related to actual
 *  collection on our shop page hence we chose to build this as
