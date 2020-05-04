@@ -1,0 +1,10 @@
+.sign-in{
+  // 30% of total viewport size
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+
+  .title{
+    margin: 10px 0;
+  }
+}
