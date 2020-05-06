@@ -2,8 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './header.style.scss';
 import headerLogo from '../../assets/images/monarchy.svg';
+import {auth} from "../../firebase/firebase.utils";
 
-const Header = () => {
+const Header = ({currentUser}) => {
 
     return(
         <div className="header">
@@ -11,12 +12,23 @@ const Header = () => {
                 <img src={headerLogo} alt="" height="80px" width="80px"/>
             </Link>
             <div className="options">
-                <Link className="options" to="/shop">
+                <Link className="option" to="/shop">
                     SHOP
                 </Link>
-                <Link className="options" to="/contact">
+                <Link className="option" to="/contact">
                     CONTACT
                 </Link>
+                {
+                    // if current user is an object and not null then evaluate it to div
+                    // if it is null then evaluate it to Link
+                    currentUser ?
+                        <div className="option" onClick={()=>auth.signOut()}>
+                            SIGN OUT
+                        </div> :
+                        <Link className="option" to="/signin">
+                            SIGN IN
+                        </Link>
+                }
             </div>
         </div>
     );
