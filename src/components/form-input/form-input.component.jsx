@@ -14,11 +14,9 @@ const FormInput = ({handleChange, labelName, ...otherProps}) => {
                 /* always apply form-input-label class on the field and decide logically if we
                 * we have to apply shrink class or not.
                 *  */
-                labelName ?
-                    (<label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
+                labelName ? (<label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
                         {labelName}
-                    </label>)
-                    : null
+                    </label>) : null
             }
         </div>
     );

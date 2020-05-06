@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import {auth} from "./firebase/firebase.utils";
+import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
 class App extends Component{
 
@@ -24,9 +24,31 @@ class App extends Component{
         * its a open messaging system on our app, whenever authentication is changed
         * this method will be called because user status has been updated
         * */
-        this.unSubscribeFromAuth = auth.onAuthStateChanged( user => {
-           this.setState({currentUser: user})
-            console.log(user)
+        this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+           if(userAuth){
+               // createUserProfileDocument returns us userRef
+               const userRef = await createUserProfileDocument(userAuth);
+               // get userRef object because we want to check if the database been updated at that reference with any new data
+               userRef.onSnapshot(snapshot => {
+                   /* documentSnapshot returns us two properties 1. exists and 2. data() method  */
+                   /* snapshot.data() -> returns us displayName, email and createdAt data from the database located in firebase */
+                   this.setState({
+                       currentUser: {
+                           // returns id and displayName, email and createdAt data using ...snapshot.data()
+                           id: snapshot.id,
+                           ...snapshot.data()
+                       }
+                   }, ()=>{console.log(this.state)} );
+
+               })
+           }
+           // userAuth is null then set the state as null
+           else{
+               this.setState({
+                   currentUser:userAuth
+               })
+           }
+            // this.setState({currentUser: user})
         });
     }
 
