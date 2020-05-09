@@ -20,6 +20,14 @@
     .option {
       cursor: pointer;
       padding: 10px 15px;
+      display: flex;
+
+      .option-name{
+        color: #357ae8;
+        font-weight: bold;
+        margin-left: 1rem;
+        text-transform: uppercase;
+      }
     }
   }
 }
