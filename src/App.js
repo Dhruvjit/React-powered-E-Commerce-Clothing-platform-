@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.scss';
 import {HomePage} from "./pages/homepage/homepage.component";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
@@ -60,7 +60,10 @@ class App extends Component{
                     <Switch>
                         <Route exact path='/' component={HomePage} />
                         <Route path='/shop' component={ShopPage} />
-                        <Route path='/signin' component={SignInAndSignUpPage} />
+                        <Route exact path='/signin'
+                               render={()=>this.props.currentUser ?
+                                   (<Redirect to="/" />) :(<SignInAndSignUpPage/>)}
+                        />
                     </Switch>
                 </div>
             </Router>
@@ -69,10 +72,16 @@ class App extends Component{
     }
 }
 
+// get current user from user reducer
+const mapStateToProps = ({user}) => ({
+    currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
     // dispatch here denotes that whatever is going to passed to me
     // will be used as action object that i ll pass to every reducer
     setCurrentUser: user => dispatch(setCurrentUser(user))
 });
+
 // null here represents that we don't want any state to prop from reducer
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
