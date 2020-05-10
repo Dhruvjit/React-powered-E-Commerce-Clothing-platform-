@@ -4,10 +4,11 @@ import './header.style.scss';
 import headerLogo from '../../assets/images/monarchy.svg';
 import {auth} from "../../firebase/firebase.utils";
 import {connect} from 'react-redux'
-import {setCurrentUser} from "../../redux/user/user.actions";
+import {setCurrentUser} from "../../redux/user/user.actions.js";
 import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser, cart}) => {
     return(
         <div className="header">
             <Link className="logo-container" to="/">
@@ -20,6 +21,9 @@ const Header = ({currentUser}) => {
                 <Link className="option" to="/contact">
                     CONTACT
                 </Link>
+
+                {/* sign in sign out transition links */}
+
                 {
                     // if current user is an object and not null then evaluate it to div
                     // if it is null then evaluate it to Link
@@ -32,7 +36,15 @@ const Header = ({currentUser}) => {
                             SIGN IN
                         </Link>
                 }
+
                 <CartIcon/>
+
+                {/* cart hidden visible transitions */}
+
+                {
+                    cart.hidden ? null : <CartDropdown />
+                }
+
             </div>
         </div>
     );
@@ -43,7 +55,8 @@ const Header = ({currentUser}) => {
 // so this function will call the user value in root-reducer which will give us user-reducer
 // here mapStateToProps is just to get the current user, it gets but doesn't sets
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    cart: state.cart
 });
 
 // connect allows us to connect our state to the root reducer
