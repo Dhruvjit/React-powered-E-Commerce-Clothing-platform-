@@ -5,9 +5,9 @@ import headerLogo from '../../assets/images/monarchy.svg';
 import {auth} from "../../firebase/firebase.utils";
 import {connect} from 'react-redux'
 import {setCurrentUser} from "../../redux/user/user.actions";
+import CartIcon from "../cart-icon/cart-icon.component";
 
 const Header = ({currentUser}) => {
-    console.log('header current user values is ', currentUser);
     return(
         <div className="header">
             <Link className="logo-container" to="/">
@@ -32,6 +32,7 @@ const Header = ({currentUser}) => {
                             SIGN IN
                         </Link>
                 }
+                <CartIcon/>
             </div>
         </div>
     );
