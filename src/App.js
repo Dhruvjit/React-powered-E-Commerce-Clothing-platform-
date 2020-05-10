@@ -6,19 +6,15 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
+import {connect} from 'react-redux';
+import {setCurrentUser} from './redux/user/user.actions';
 
 class App extends Component{
 
     unSubscribeFromAuth = null;
 
-    constructor() {
-        super();
-        this.state= {
-            currentUser: null
-        }
-    }
-
     componentDidMount() {
+
         // this method is called whenever user state changes on sign in using google
         /*
         * its a open messaging system on our app, whenever authentication is changed
@@ -32,23 +28,16 @@ class App extends Component{
                userRef.onSnapshot(snapshot => {
                    /* documentSnapshot returns us two properties 1. exists and 2. data() method  */
                    /* snapshot.data() -> returns us displayName, email and createdAt data from the database located in firebase */
-                   this.setState({
-                       currentUser: {
-                           // returns id and displayName, email and createdAt data using ...snapshot.data()
-                           id: snapshot.id,
-                           ...snapshot.data()
-                       }
-                   }, ()=>{console.log(this.state)} );
+                   this.props.setCurrentUser({
+                       // returns id and displayName, email and createdAt data using ...snapshot.data()
+                       id: snapshot.id,
+                       ...snapshot.data()
+                   });
 
                })
            }
-           // userAuth is null then set the state as null
-           else{
-               this.setState({
-                   currentUser:userAuth
-               })
-           }
-            // this.setState({currentUser: user})
+            // if userAuth is null then set the state as userAuth which is actually - null
+            this.props.setCurrentUser(userAuth);
         });
     }
 
@@ -67,7 +56,7 @@ class App extends Component{
         return(
             <Router>
                 <div className="body">
-                    <Header currentUser={this.state.currentUser}/>
+                    <Header/>
                     <Switch>
                         <Route exact path='/' component={HomePage} />
                         <Route path='/shop' component={ShopPage} />
@@ -80,4 +69,10 @@ class App extends Component{
     }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+    // dispatch here denotes that whatever is going to passed to me
+    // will be used as action object that i ll pass to every reducer
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+// null here represents that we don't want any state to prop from reducer
+export default connect(null, mapDispatchToProps)(App);
