@@ -16,10 +16,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
         // if case set_current_user then update the state
         case UserActionTypes.SET_CURRENT_USER:
             return {
+                /* triple dots here means that we are spreading everything on the
+                   state and only care about spreading what we care about i.e. currentUser
+                 */
                 ...state,
                 currentUser: action.payload
             }
-
             //    return state as default when no actions are matched
         default:
             return state;

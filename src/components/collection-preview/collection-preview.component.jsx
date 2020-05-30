@@ -13,8 +13,11 @@ const CollectionPreview = ({title,items}) => {
                 {/* we can make use of multiple filter and map at the same time */}
                 {items
                     .filter((item, idx) => idx < 4)
-                    .map( ({id, ...otherItemProps}) => (
-                        <CollectionItem key={id} {...otherItemProps} />
+                    // we are sending the whole item here instead of individual props
+                    // because that is what we intend to send it as whole in 'collection-item'
+                    // component for our redux store
+                    .map( (item) => (
+                        <CollectionItem key={item.id} item={item} />
                     ) )
                 }
             </div>
