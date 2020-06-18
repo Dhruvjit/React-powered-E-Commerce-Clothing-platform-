@@ -84,4 +84,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // null here represents that we don't want any state to prop from reducer
+// connect connects component to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(App);

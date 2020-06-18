@@ -1,5 +1,7 @@
 import {CartActionTypes} from "./cart.types";
+import {addItemToCart} from "./cart.utils";
 
+// hide cart reducer at first
 const INITIAL_STATE = {
     hidden: true,
     cartItems: []
@@ -24,7 +26,7 @@ const cartReducer = (state=INITIAL_STATE, action) => {
                    of state into the cartItems and at the end we are
                    appending extra payload
                 */
-                cartItems: [...state.cartItems, action.payload]
+                cartItems: addItemToCart(state.cartItems, action.payload)
             }
             default:
             return state
