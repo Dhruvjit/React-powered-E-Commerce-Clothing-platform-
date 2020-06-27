@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
 import {setCurrentUser} from "../../redux/user/user.actions.js";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import {createStructuredSelector} from "reselect";
+import {selectCurrentCart, selectCurrentUser} from "../../redux/user/user.selectors";
+import {selectCartItems} from "../../redux/cart/cart.selectors";
 
 const Header = ({currentUser, cart}) => {
     return(
@@ -54,9 +57,9 @@ const Header = ({currentUser, cart}) => {
 // state here is the rootReducer
 // so this function will call the user value in root-reducer which will give us user-reducer
 // here mapStateToProps is just to get the current user, it gets but doesn't sets
-const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser,
-    cart: state.cart
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    cart: selectCurrentCart
 });
 
 // connect allows us to connect our state to the root reducer
