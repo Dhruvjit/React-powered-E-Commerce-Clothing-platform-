@@ -58,6 +58,8 @@ const Header = ({currentUser, cart}) => {
 // so this function will call the user value in root-reducer which will give us user-reducer
 // here mapStateToProps is just to get the current user, it gets but doesn't sets
 const mapStateToProps = createStructuredSelector({
+    // here top level state gets automatically passed to selectors
+    // e.g this resembles to writing selectCurrentUser(state)
     currentUser: selectCurrentUser,
     cart: selectCurrentCart
 });

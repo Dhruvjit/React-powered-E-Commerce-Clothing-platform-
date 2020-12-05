@@ -5,8 +5,10 @@
 * */
 import {createSelector} from "reselect";
 
+// select
 const selectCart = state => state.cart;
 
+// reselect
 export const selectCartItems = createSelector(
 
     /*  here the first argument i.e. selectCart is the collection e.g. like of an array
